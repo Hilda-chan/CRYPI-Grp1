@@ -1,5 +1,6 @@
 import socket
 import pickle
+from client_encryptor import encrypt
 
 def send_data_to_server(firstname, lastname, key, vector, host='localhost', port=65432):
     # Create a socket object
@@ -29,10 +30,13 @@ def send_data_to_server(firstname, lastname, key, vector, host='localhost', port
 
 if __name__ == "__main__":
     # Example data
-    firstname = 'Hello'
-    lastname = 'World'
-    key = '123482659'
-    vector = [[1, 2, 3], [4, 5, 6]]
+    print("Hello, what is your first name?")
+    firstname = input(">> ")
+
+    print("What is your last name?")
+    lastname = input(">> ")
+
+    (key, vector) = encrypt(firstname, lastname)
     
     send_data_to_server(firstname, lastname, key, vector)
 
