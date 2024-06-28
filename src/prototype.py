@@ -37,6 +37,17 @@ def calculate(pbk, v1, v2):
 
     return compare(enc1, enc2)
 
+def result(dst):
+    seuil = 0.6
+    print("Distance Euclidienne entre les deux visages :")
+    print(dst)
+    if dst < seuil :
+        print("La personne est authentifié.")
+        return True
+    else :
+        print("La personne n'est pas reconnue.")
+        return False
+
 path1 = "./LFW/Aaron_Pena_0001.jpg"
 path2 = "./LFW/Aaron_Eckhart_0001.jpg"
 path3 = "./LFW/Abel_Pacheco_0002.jpg"
@@ -70,4 +81,4 @@ v2 = getFaceVectors(img2)
 #enc = compare(test1, test2)
 enc = calculate(HE, v1, v2)
 print("Ecart moyen des vecteurs :")
-print(np.mean(np.sqrt(HE.decrypt(enc))))
+result(np.mean(np.sqrt(HE.decrypt(enc))))
