@@ -1,7 +1,7 @@
 import socket
 import pickle
 
-def send_data_to_server(name, key, vector, host='localhost', port=65432):
+def send_data_to_server(firstname, lastname, key, vector, host='localhost', port=65432):
     # Create a socket object
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         # Connect to the server
@@ -9,7 +9,8 @@ def send_data_to_server(name, key, vector, host='localhost', port=65432):
         
         # Prepare the data to be sent
         data = {
-            'name': name,
+            'firstname': firstname,
+            'lastname': lastname,
             'key': key,
             'vector': vector
         }
@@ -28,9 +29,10 @@ def send_data_to_server(name, key, vector, host='localhost', port=65432):
 
 if __name__ == "__main__":
     # Example data
-    name = 'Hello World'
+    firstname = 'Hello'
+    lastname = 'World'
     key = '123482659'
     vector = [[1, 2, 3], [4, 5, 6]]
     
-    send_data_to_server(name, key, vector)
+    send_data_to_server(firstname, lastname, key, vector)
 

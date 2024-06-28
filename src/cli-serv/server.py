@@ -23,20 +23,17 @@ def start_server(host='localhost', port=65432):
 
                 # Deserialize the received data
                 received_data = pickle.loads(data)
-                name = received_data['name']
+                firstname = received_data['firstname']
+                lastname = received_data['lastname']
                 key = received_data['key']
                 vector = received_data['vector']
 
 
-                print(f'Received data: Name={name}, Key={key}, Vector={vector}')
+                print(f'Received data: Firstname={firstname}, Lastname={lastname}, Key={key}, Vector={vector}')
                 
         
         
-                # Prepare the response
-                if (name == "Hello World"):
-                    response = f'Welcome {name}'
-                else:
-                    response = f'Dude, you ain\'t the one'
+                response = f'Welcome {firstname} {lastname}'
                 
                 # Send the response back to the client
                 conn.sendall(response.encode('utf-8'))
