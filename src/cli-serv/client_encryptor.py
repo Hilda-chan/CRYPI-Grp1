@@ -76,5 +76,3 @@ def encrypt(firstname, lastname):
     # Dans l'idéal
     # return (pbk, enc_vectors)
     return (pbk, vectors)
-
-encrypt("Josh", "Evans")
