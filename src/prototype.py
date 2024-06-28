@@ -28,8 +28,8 @@ def encryptVector(pbk, v):
         res = np.append(res, pbk.encrypt(v[i]))#pbk.encrypt(v[i]))
     return res
 
-def decrypt(prk, res):
-    return prk.decrypt(res)
+def decrypt(HE, res):
+    return np.mean(np.sqrt(HE.decrypt(res)))
 
 def calculate(pbk, v1, v2):
     enc1 = encryptVector(pbk, v1)
@@ -80,5 +80,5 @@ v2 = getFaceVectors(img2)
 
 #enc = compare(test1, test2)
 enc = calculate(HE, v1, v2)
-print("Ecart moyen des vecteurs :")
-result(np.mean(np.sqrt(HE.decrypt(enc))))
+
+result(decrypt(HE, enc))
