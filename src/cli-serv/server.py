@@ -5,7 +5,7 @@ import sys
 import Pyfhel
 import numpy as np
 import cv2
-sys.path.append('../')
+#sys.path.append('../')
 from prototype import readImg
 import face_recognition
 
@@ -25,7 +25,7 @@ def start_server(host='localhost', port=65432):
                 print(f'Connected by {addr}')
                 
                 # Receive the data from the client
-                data = conn.recv(1024)
+                data = conn.recv(65356)
                 if not data:
                     break
 
@@ -40,7 +40,7 @@ def start_server(host='localhost', port=65432):
                 print(f'Received data: Firstname={firstname}, Lastname={lastname}, Key={key}, Vector={vector}')
         
                 # Construct the directory path
-                directory_path = f'../../data/LFW/{firstname}_{lastname}'
+                directory_path = f'data/LFW/{firstname}_{lastname}'
 
                 # Check if the directory exists
                 if os.path.exists(directory_path):
@@ -68,7 +68,7 @@ def start_server(host='localhost', port=65432):
                             }
                             HE.contextGen(**ckks_params)  # Generate context for ckks scheme
                             HE.keyGen()
-                            v = getFaceVectors(img)
+                            #v = getFaceVectors(img)
 
                             break
                     if image_path:
