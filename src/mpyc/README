@@ -1,0 +1,21 @@
+lancer deux terminaux:
+
+Dans le premier, lancer:
+"python3 proto.py -M2 -I0 1 2 3"
+(aka le serveur)
+
+
+Dans le second, lancer:
+"python3 proto.py -M2 -I1 4 5 6"
+puis, entrer un username:
+"prénom_nom"
+(aka le client)
+
+À l'heure actuelle, le serveur et le client font parvenir une liste de int qui ne sont jamais lue par l'autre partie et le client recoit le résultat de l'addition des listes.
+
+Les deux ont également accès au nom d'utilisateur entré par le client lors du lancement du script.
+
+Objectifs:
+Changer l'accès à la liste dans la commande par une recherche des vecteurs sur une image stockée.
+Utiliser pour cela le nom d'utilisateur donné par le client.
+Enfin, renvoyer le résultat des opérations sur les vecteurs au client.
