@@ -1,21 +1,12 @@
-lancer deux terminaux:
+lancer dans deux terminaux à la racine du projet:
 
-Dans le premier, lancer:
-"python3 proto.py -M2 -I0 1 2 3"
-(aka le serveur)
+Pour lancer le serveur:
+"python3 src/mpyc/server.py -M2 -I0"
 
+Pour lancer le client:
+"python3 src/mpyc/client.py -M2 -I1 {path}" ### avec path, le chemin relatif d'une image.
+puis insérer un firstname, et un lastname ### La caste minuscule/majuscule est gérée, ainsi que les espaces.
 
-Dans le second, lancer:
-"python3 proto.py -M2 -I1 4 5 6"
-puis, entrer un username:
-"prénom_nom"
-(aka le client)
-
-À l'heure actuelle, le serveur et le client font parvenir une liste de int qui ne sont jamais lue par l'autre partie et le client recoit le résultat de l'addition des listes.
-
-Les deux ont également accès au nom d'utilisateur entré par le client lors du lancement du script.
-
-Objectifs:
-Changer l'accès à la liste dans la commande par une recherche des vecteurs sur une image stockée.
-Utiliser pour cela le nom d'utilisateur donné par le client.
-Enfin, renvoyer le résultat des opérations sur les vecteurs au client.
+Les résultats sont:
+"Welcome {firstname} {lastname}" si l'utilisateur est reconnu
+"You are not recognized, try again" si l'utilisateur n'est pas reconnu
