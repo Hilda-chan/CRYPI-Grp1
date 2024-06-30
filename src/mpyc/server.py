@@ -7,34 +7,16 @@ from server_encryptor import serv_encrypt
 
 m = len(mpc.parties)
 
-if m != 2:
-    print('Invalid amount of parties. The number of parties must be 2.')
-    sys.exit()
-
 server = 0
 client = 1
 
-if mpc.pid == client and len(sys.argv) < 2:
-    print('The path to the picture is required')
+if m != 2:
+    print('Invalid amount of parties. The number of parties must be 2.')
     sys.exit()
 
 username = ''
 picture_path = ''
 cli_vectors = []
-
-if mpc.pid == client:
-    firstname = input("Firstname: ").capitalize().replace(" ", "")
-    lastname = input("Lastname: ").capitalize().replace(" ", "")
-    username = f'{firstname}_{lastname}'
-    picture_path = sys.argv[1]
-    if (os.path.exists(picture_path)):
-        cli_vectors = cli_encrypt(username, picture_path)
-    else:
-        print("Invalid User")
-        sys.exit()
-    
-    
-    
 
 # Secure integer field
 secfxp = mpc.SecFxp()
@@ -48,10 +30,7 @@ shared_username = mpc.run(shared_username) # Wait for the username to be entirel
 ### template end ###
 mpc.run(mpc.shutdown())
 
-serv_vectors = []
-
-if mpc.pid == server:
-    serv_vectors = serv_encrypt(shared_username)
+serv_vectors = serv_encrypt(shared_username)
 
 
 mpc.run(mpc.start())
@@ -76,11 +55,3 @@ result = mpc.run(mpc.output(res, receivers=client))
 
 ### template ends ###
 mpc.run(mpc.shutdown())
-
-# Process the result
-
-if mpc.pid == client:
-    if (result < 0.36):
-        print(f'Welcome {firstname} {lastname}')
-    else:
-        print('You are not recognized, try again')
