@@ -2,7 +2,7 @@ import sys
 import mpyc
 import os
 from mpyc.runtime import mpc
-from client_encryptor import cli_encrypt
+from client_encryptor import toUsername, cli_encrypt
 from server_encryptor import serv_encrypt
 
 m = len(mpc.parties)
@@ -14,20 +14,10 @@ if m != 2:
     print('Invalid amount of parties. The number of parties must be 2.')
     sys.exit()
 
-if len(sys.argv) < 2:
-    print('The path to the picture is required')
-    sys.exit()
+username = ''
+picture_path = ''
+cli_vectors = []
 
-firstname = input("Firstname: ").capitalize().replace(" ", "")
-lastname = input("Lastname: ").capitalize().replace(" ", "")
-username = f'{firstname}_{lastname}'
-picture_path = sys.argv[1]
-if (os.path.exists(picture_path)) and (os.path.exists(f'./data/LFW/{username}')):
-    cli_vectors = cli_encrypt(username, picture_path)
-else:
-    print("Invalid User")
-    sys.exit()
-    
 # Secure integer field
 secfxp = mpc.SecFxp()
 
@@ -40,7 +30,8 @@ shared_username = mpc.run(shared_username) # Wait for the username to be entirel
 ### template end ###
 mpc.run(mpc.shutdown())
 
-serv_vectors = []
+serv_vectors = serv_encrypt(shared_username)
+
 
 mpc.run(mpc.start())
 ### template start ###
@@ -64,10 +55,3 @@ result = mpc.run(mpc.output(res, receivers=client))
 
 ### template ends ###
 mpc.run(mpc.shutdown())
-
-# Process the result
-
-if (result < 0.36):
-    print(f'Welcome {firstname} {lastname}')
-else:
-    print('You are not recognized, try again')

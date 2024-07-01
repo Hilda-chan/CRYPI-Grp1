@@ -43,18 +43,16 @@ mpc.run(mpc.shutdown())
 mpc.run(mpc.start())
 # Receive the minimum distance and the corresponding username from the server
 min_distance = mpc.transfer(secfxp(0), senders=server)
-ascii_username = mpc.transfer([secfxp(0)] * 100, senders=server)  # Assuming max username length of 100
 
 min_distance = mpc.run(min_distance)
-ascii_username = mpc.run(ascii_username)
+
 mpc.run(mpc.shutdown())
 
 # Convert the list of ASCII values back to a string
-matched_username = ''.join(chr(int(x)) for x in ascii_username).strip('\x00')
 
-print(f"Minimum distance: {min_distance}, Matched username: {matched_username}")
+print(f"Minimum distance: {min_distance}")
 
 if min_distance < 0.36:
-    print(f'Welcome {matched_username.replace("_", " ")}')
+    print(f'Welcome to the World')
 else:
     print('You are not recognized, try again')

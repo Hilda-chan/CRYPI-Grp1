@@ -1,6 +1,6 @@
 import sys
 from mpyc.runtime import mpc
-
+"""
 m = len(mpc.parties)
 
 if m != 2:
@@ -64,3 +64,5 @@ elif mpc.pid == client:
     print(f'Result of secure array computation: {result}')
 elif mpc.pid == server:
     print(f'Result of secure array computation: {result2}')
+"""
+
