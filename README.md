@@ -1,12 +1,10 @@
 # CRYPI-Grp1
-
+```
 |- data
-
 |- report
-
 |- slides
-
 |- src
+```
 
 Le dossier data contient toute la database utilisée par le serveur.
 Le dossier report contient le rapport expliquant le déroulé de l'ensemble du projet.
